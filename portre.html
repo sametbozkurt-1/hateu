@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Text Filling</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%; /* Yüksekliği %100 yaparak alt ve üst boşlukları ortadan kaldırır */
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Ekranın tamamını kullan */
+      background: #000;
+      overflow: hidden;
+    }
+
+    p {
+      font-size: 10px;
+      letter-spacing: -1px;
+      background: url("2.png") no-repeat center center;
+      background-attachment: fixed;
+      background-size: cover;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-align: center;
+      width: 100%; /* Tam genişlik */
+      height: 100%; /* Tam yükseklik */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+
+<body>
+  <p id="text"></p>
+
+  <script>
+    function fillText() {
+      let textElement = document.getElementById("text");
+      let loveText = "I love you I hate you";
+
+      // Çalışma alanı ölçülerini al
+      let width = textElement.clientWidth;
+      let height = textElement.clientHeight;
+      let fontSize = 10; // Başlangıç font boyutu
+
+      // Her satırda ne kadar kelime sığacağını hesapla
+      let wordsPerRow = Math.floor(width / (fontSize * 8)); // 5, ortalama harf genişliği
+      let rows = Math.floor(height / fontSize); // Kaç satır sığar
+
+      // Toplam kaç kelime sığacağını hesapla
+      let totalWords = wordsPerRow * rows;
+
+      // Metni tekrar ederek ekle
+      textElement.innerText = loveText.repeat(totalWords);
+
+      // Yazının ekranda düzgün gözükmesi için font boyutunu dinamik ayarla
+      let maxFontSize = 20; // Maksimum font boyutu
+      while (textElement.scrollHeight > height && fontSize < maxFontSize) {
+        fontSize++;
+        textElement.style.fontSize = fontSize + "px";
+        totalWords = wordsPerRow * rows;
+        textElement.innerText = loveText.repeat(totalWords);
+      }
+    }
+
+    fillText(); // İlk yüklenirken çalıştır
+    window.addEventListener("resize", fillText); // Pencere boyutu değişince güncelle
+  </script>
+</body>
+
+</html>
