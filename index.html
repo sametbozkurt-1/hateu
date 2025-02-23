@@ -43,9 +43,11 @@
       word-wrap: break-word;
     }
     @media (max-width: 768px) {
-  p {
-    font-size: 6px;
-  }
+      p {
+        font-size: 6px;
+        letter-spacing: 0.5px; /* Mobilde boşluk eklemek için */
+        background-size: cover; /* Fotoğrafın tam ekranı kaplamasını sağlarız */
+      }
 }
 
   </style>
@@ -71,6 +73,8 @@
 
   // Toplam kaç kelime sığacağını hesapla
   let totalWords = wordsPerRow * rows;
+
+  let textToDisplay = loveText.split(" ").map(word => word + " ").join("").repeat(totalWords).trim();
 
   // Metni tekrar ederek ekle
   textElement.style.fontSize = fontSize + "px";
