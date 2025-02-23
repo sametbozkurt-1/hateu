@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dynamic Text Filling</title>
+  <title>Sevgi ve nefret tüm duygular sana en derinden</title>
   <style>
     * {
       margin: 0;
@@ -14,14 +14,14 @@
     }
 
     html, body {
-      height: 100%; /* Yüksekliği %100 yaparak alt ve üst boşlukları ortadan kaldırır */
+      height: 99%; /* Yüksekliği %100 yaparak alt ve üst boşlukları ortadan kaldırır */
     }
 
     body {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Ekranın tamamını kullan */
+      height: 90vh; /* Ekranın tamamını kullan */
       background: #000;
       overflow: hidden;
     }
@@ -36,7 +36,7 @@
       color: transparent;
       text-align: center;
       width: 100%; /* Tam genişlik */
-      height: 100%; /* Tam yükseklik */
+      height: 90%; /* Tam yükseklik */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -45,6 +45,8 @@
     @media (max-width: 768px) {
       p {
         font-size: 6px;
+        letter-spacing: -0.5px; /* Mobilde boşluk eklemek için */
+        background-size: cover; /* Fotoğrafın tam ekranı kaplamasını sağlarız */
       }
 }
 
@@ -62,7 +64,7 @@
   // Çalışma alanı ölçülerini al
   let width = window.innerWidth;
   let height = window.innerHeight;
-  let fontSize = window.innerWidth <= 768 ? 6 : 10; // Mobil için daha küçük font boyutu
+  let fontSize = window.innerWidth <= 768 ? 2.5 : 10; // Mobil için daha küçük font boyutu
 
   // Her satırda ne kadar kelime sığacağını hesapla
   let scaleFactor = window.innerWidth <= 768 ? 2.5 : 8;
