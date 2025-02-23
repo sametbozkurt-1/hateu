@@ -27,21 +27,30 @@
     }
 
     p {
-      font-size: 10px;
-      letter-spacing: -1px;
-      background: url("2.png") no-repeat center center;
-      background-attachment: fixed;
-      background-size: cover;
-      -webkit-background-clip: text;
-      color: transparent;
-      text-align: center;
-      width: 100%; /* Tam genişlik */
-      height: 100%; /* Tam yükseklik */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      word-wrap: break-word;
-    }
+  font-size: 10px;
+  letter-spacing: -1px;
+  background: url("2.png") no-repeat top center; /* Üstten başlat */
+  background-attachment: fixed;
+  background-size: cover;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Üstten başlat */
+  word-wrap: break-word;
+  padding-top: 10px; /* İsteğe bağlı: Üstten biraz boşluk */
+}
+
+
+    @media (max-width: 768px) {
+  p {
+    font-size: 6px;
+  }
+}
+
   </style>
 </head>
 
@@ -50,36 +59,30 @@
 
   <script>
     function fillText() {
-      let textElement = document.getElementById("text");
-      let loveText = "I love you I hate you";
+  let textElement = document.getElementById("text");
+  let loveText = "Sana kalsın yalan sevgin, rahat yok mu omuzunda? Merhametini dilenen yok; istemiyorum, onurum var 'Yalnızlık korkun' demiştin, tek başımayım korkusuzca Duygularını öldürür duygu beslediğin duygusuzlar Susmayı denedim fakat kustun tüm nefreti bana Küskün satırlarım çünkü tükeniyor her an zaman Çekip gittim; sanma ki mutluyum, inan yıkık hâlim İstediğini aldın işte, ellerinde kırık kalbim Bırak kalsın, belki bakıp hatırlarsın Ricky öldü ama sen hep Marina'msın İzlediğimiz filmler gibi bu film de yarım kaldı Shaur haklı, tüm yakınlar uzaklaştı Suçlu kim mi düşünmedim, cevap neyi değiştirir? Sorun ne sensin ne de ben, sorun biziz; acı verir Sevginin her şeye yeterli olmadığını gördüğünde Oysa en güzel anımdın distopik bu günlüğümde Yalanlar okunuyor birer birer gözlerinden Güven bu, öldü bir kez, boğdun hem de ellerinle Sanki bir parçasın, söküp alınmış öz benimden Sevgi ve nefret tüm duygular sana en derinden, mühürlenmiş kalbim sana bir bataklık Yerde cam kırıkları ama hayaller parçalanmış Unutursan bizi o zaman aç, bu parça çalsın Yalnızca sana yazdım -şam ";
 
-      // Çalışma alanı ölçülerini al
-      let width = textElement.clientWidth;
-      let height = textElement.clientHeight;
-      let fontSize = 10; // Başlangıç font boyutu
+  // Çalışma alanı ölçülerini al
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let fontSize = window.innerWidth <= 768 ? 6 : 10; // Mobil için daha küçük font boyutu
 
-      // Her satırda ne kadar kelime sığacağını hesapla
-      let wordsPerRow = Math.floor(width / (fontSize * 8)); // 5, ortalama harf genişliği
-      let rows = Math.floor(height / fontSize); // Kaç satır sığar
+  // Her satırda ne kadar kelime sığacağını hesapla
+  let scaleFactor = window.innerWidth <= 768 ? 2.5 : 8;
+  let wordsPerRow = Math.floor(width / (fontSize * scaleFactor));
+  let rows = Math.floor(height / fontSize);
 
-      // Toplam kaç kelime sığacağını hesapla
-      let totalWords = wordsPerRow * rows;
+  // Toplam kaç kelime sığacağını hesapla
+  let totalWords = wordsPerRow * rows;
 
-      // Metni tekrar ederek ekle
-      textElement.innerText = loveText.repeat(totalWords);
+  // Metni tekrar ederek ekle
+  textElement.style.fontSize = fontSize + "px";
+  textElement.innerText = loveText.repeat(totalWords);
+}
 
-      // Yazının ekranda düzgün gözükmesi için font boyutunu dinamik ayarla
-      let maxFontSize = 20; // Maksimum font boyutu
-      while (textElement.scrollHeight > height && fontSize < maxFontSize) {
-        fontSize++;
-        textElement.style.fontSize = fontSize + "px";
-        totalWords = wordsPerRow * rows;
-        textElement.innerText = loveText.repeat(totalWords);
-      }
-    }
+fillText(); // İlk yüklenirken çalıştır
+window.addEventListener("resize", fillText); // Pencere boyutu değişince güncelle
 
-    fillText(); // İlk yüklenirken çalıştır
-    window.addEventListener("resize", fillText); // Pencere boyutu değişince güncelle
   </script>
 </body>
 
