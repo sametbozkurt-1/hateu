@@ -19,11 +19,12 @@
 
     body {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      justify-content: flex-start; /* Metni sola hizala */
+      align-items: flex-start; /* Metni yukarı hizala */
       height: 100vh; 
       background: #000;
       overflow: hidden;
+      padding: 10px; /* Metnin kenarlara yapışmasını önlemek için */
     }
 
     p {
@@ -34,14 +35,11 @@
       background-size: cover;
       -webkit-background-clip: text;
       color: transparent;
-      text-align: center;
+      text-align: left;
       width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      height: auto;
       word-wrap: break-word;
-      white-space: pre-wrap; /* Satır sonlarında kelimelerin doğru yerleşmesini sağlar */
+      white-space: pre-wrap;
     }
 
     @media (max-width: 768px) {
@@ -49,7 +47,6 @@
         font-size: 6px;
       }
     }
-
   </style>
 </head>
 
@@ -61,26 +58,19 @@
       let textElement = document.getElementById("text");
       let loveText = "Sana kalsın yalan sevgin, rahat yok mu omuzunda? Merhametini dilenen yok; istemiyorum, onurum var 'Yalnızlık korkun' demiştin, tek başımayım korkusuzca Susmayı denedim fakat kustun tüm nefreti bana Küskün satırlarım çünkü tükeniyor her an zaman Çekip gittim; sanma ki mutluyum, inan yıkık hâlim İstediğini aldın işte, ellerinde kırık kalbim Bırak kalsın, belki bakıp hatırlarsın Ricky öldü ama sen hep Marina'msın İzlediğimiz filmler gibi bu film de yarım kaldı Shaur haklı, tüm yakınlar uzaklaştı Suçlu kim mi düşünmedim, cevap neyi değiştirir? Sorun ne sensin ne de ben, sorun biziz; acı verir Sevginin her şeye yeterli olmadığını gördüğünde Oysa en güzel anımdın distopik bu günlüğümde Yalanlar okunuyor birer birer gözlerinden Güven bu, öldü bir kez, boğdun hem de ellerinle Sanki bir parçasın, söküp alınmış öz benimden Sevgi ve nefret tüm duygular sana en derinden, mühürlenmiş kalbim sana bir bataklık Yerde cam kırıkları ama hayaller parçalanmış Unutursan bizi o zaman aç, bu parça çalsın Yalnızca sana yazdım";
 
-      // Çalışma alanı ölçülerini al
       let width = window.innerWidth;
       let height = window.innerHeight;
-      let fontSize = window.innerWidth <= 768 ? 6 : 10; // Mobil için daha küçük font boyutu
-
-      // Her satırda ne kadar kelime sığacağını hesapla
+      let fontSize = window.innerWidth <= 768 ? 6 : 10;
       let scaleFactor = window.innerWidth <= 768 ? 2.5 : 8;
       let wordsPerRow = Math.floor(width / (fontSize * scaleFactor));
       let rows = Math.floor(height / fontSize);
-
-      // Toplam kaç kelime sığacağını hesapla
       let totalWords = wordsPerRow * rows;
-
-      // Metni tekrar ederek boşlukları koruyarak ekle
       textElement.style.fontSize = fontSize + "px";
       textElement.innerText = (loveText + " ").repeat(totalWords);
     }
 
-    fillText(); // İlk yüklenirken çalıştır
-    window.addEventListener("resize", fillText); // Pencere boyutu değişince güncelle
+    fillText();
+    window.addEventListener("resize", fillText);
   </script>
 </body>
 
